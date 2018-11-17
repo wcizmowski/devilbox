@@ -175,7 +175,7 @@ services:
       - ${DEVILBOX_PATH}/log/php-fpm-${PHP_SERVER:-7.0}:/var/log/php:rw${MOUNT_OPTIONS}
 
       # Mount Mail directory
-      - ${DEVILBOX_PATH}/mail:/var/mail:rw${MOUNT_OPTIONS}
+      - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
 
       # Mount DB Backup directory
       - ${DEVILBOX_PATH}/backups:/shared/backups:rw${MOUNT_OPTIONS}
@@ -505,6 +505,10 @@ networks:
 # VOLUMES
 ################################################################################
 volumes:
+  # ------------------------------------------------------------
+  # Misc
+  # ------------------------------------------------------------
+  devilbox-mail:
   # ------------------------------------------------------------
   # MySQL
   # ------------------------------------------------------------
