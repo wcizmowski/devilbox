@@ -6,10 +6,22 @@
 ###  All the following settings are applied during
 ###  $ docker-compose up
 ###
-###  No need to rebuild any dockers!
+###  No need to rebuild any docker images!
 ###
-###  For custom variables, scroll to the bottom
+###  IMPORTANT:
+###  ----------
+###  When changing any values ensure to stop, rm and restart:
+###  $ docker-compose stop
+###  $ docker-compose rm -f
+###  $ docker-compose up
 ###
+###  NOTE:
+###  -----
+###  For you own custom variables, scroll to the bottom
+###
+
+# The following line will disable any shellcheck warnings throughout this file
+# shellcheck disable=SC2034,SC2125
 
 
 ###
@@ -128,7 +140,6 @@ TIMEZONE=Europe/Berlin
 
 
 
-
 ################################################################################
 ###
 ### INTRANET SETTINGS
@@ -160,7 +171,7 @@ DNS_CHECK_TIMEOUT=1
 ### This has nothing to do for SSL certificates for projects, it is just for the intranet
 ### itself.
 ###
-DEVILBOX_UI_SSL_CN=localhost,*.localhost,devilbox,*.devilbox
+DEVILBOX_UI_SSL_CN=localhost,*.localhost,devilbox,*.devilbox,httpd
 
 
 ###
@@ -203,6 +214,26 @@ DEVILBOX_UI_PASSWORD=password
 DEVILBOX_UI_ENABLE=1
 
 
+###
+### Automatically be logged in into phpMyAdmin
+###
+### Example:
+###   DEVILBOX_VENDOR_PHPMYADMIN_AUTOLOGIN=1
+###   DEVILBOX_VENDOR_PHPMYADMIN_AUTOLOGIN=0
+###
+DEVILBOX_VENDOR_PHPMYADMIN_AUTOLOGIN=1
+
+
+###
+### Automatically be logged in into phpPgAdmin
+###
+### Example:
+###   DEVILBOX_VENDOR_PHPPGADMIN_AUTOLOGIN=1
+###   DEVILBOX_VENDOR_PHPPGADMIN_AUTOLOGIN=0
+###
+DEVILBOX_VENDOR_PHPPGADMIN_AUTOLOGIN=1
+
+
 
 ################################################################################
 ###
@@ -233,6 +264,7 @@ DEVILBOX_UI_ENABLE=1
 PHP_SERVER=7.2
 #PHP_SERVER=7.3
 #PHP_SERVER=7.4
+#PHP_SERVER=8.0
 
 
 ###
@@ -458,9 +490,11 @@ HOST_PATH_MONGO_DATADIR=./data/mongo
 ###
 ### Enable certain PHP modules which are not enabled by default
 ###
-### Currently the only module that can be enabled is 'ioncube'
+### Currently the only modules that can be enabled are 'ioncube' and 'blackfire'
+### Also ensure to disable xdebug when using any of the above:
+### https://xdebug.org/docs/install#compat
 ###
-### PHP_MODULES_ENABLE=ioncube
+### PHP_MODULES_ENABLE=ioncube, blackfire
 ###
 PHP_MODULES_ENABLE=
 
@@ -472,7 +506,7 @@ PHP_MODULES_ENABLE=
 ###
 ### PHP_MODULES_DISABLE=xdebug,imagick,swoole
 ###
-PHP_MODULES_DISABLE=blackfire,oci8,PDO_OCI,pdo_sqlsrv,sqlsrv,rdkafka,swoole
+PHP_MODULES_DISABLE=oci8,PDO_OCI,pdo_sqlsrv,sqlsrv,rdkafka,swoole
 
 
 ###
@@ -525,6 +559,18 @@ HTTPD_TEMPLATE_DIR=.devilbox
 ### simply drop the connection before getting an answer by PHP.
 ###
 HTTPD_TIMEOUT_TO_PHP_FPM=180
+
+
+###
+### NGINX ONLY
+###
+### Set worker_processes and worker_connections
+###
+### https://nginx.org/en/docs/ngx_core_module.html#worker_processes
+### https://nginx.org/en/docs/ngx_core_module.html#worker_connections
+###
+HTTPD_NGINX_WORKER_PROCESSES=auto
+HTTPD_NGINX_WORKER_CONNECTIONS=1024
 
 
 

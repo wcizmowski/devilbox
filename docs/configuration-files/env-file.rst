@@ -495,7 +495,7 @@ password by which it will be protected.
 .. _env_devilbox_ui_enable:
 
 DEVILBOX_UI_ENABLE
--------------------
+------------------
 
 In case you want to completely disable the Devilbox intranet, such as when running it on production,
 you need to set this variable to ``0``.
@@ -509,6 +509,34 @@ ordering their names alphabetically.
 +=========================+================+===================+
 | ``DEVILBOX_UI_ENABLE``  | ``0`` or ``1`` | ``1``             |
 +-------------------------+----------------+-------------------+
+
+
+DEVILBOX_VENDOR_PHPMYADMIN_AUTOLOGIN
+------------------------------------
+
+By default phpMyAdmin will autologin without having to specify username or password. The phpMyAdmin
+vendor is not protected once you protect the Intranet. If you want users to enter username and
+password here as well, you should set the value to ``0``.
+
++-------------------------------------------+----------------+-------------------+
+| Name                                      | Allowed values | Default value     |
++===========================================+================+===================+
+| ``DEVILBOX_VENDOR_PHPMYADMIN_AUTOLOGIN``  | ``0`` or ``1`` | ``1``             |
++-------------------------------------------+----------------+-------------------+
+
+
+DEVILBOX_VENDOR_PHPPGADMIN_AUTOLOGIN
+------------------------------------
+
+By default phpPgAdmin will autologin without having to specify username or password. The phpPgAdmin
+vendor is not protected once you protect the Intranet. If you want users to enter username and
+password here as well, you should set the value to ``0``.
+
++-------------------------------------------+----------------+-------------------+
+| Name                                      | Allowed values | Default value     |
++===========================================+================+===================+
+| ``DEVILBOX_VENDOR_PHPPGADMIN_AUTOLOGIN``  | ``0`` or ``1`` | ``1``             |
++-------------------------------------------+----------------+-------------------+
 
 
 Docker image versions
@@ -528,11 +556,11 @@ PHP_SERVER
 
 This variable choses your desired PHP-FPM version to be started.
 
-+-------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+
-| Name                    | Allowed values                                                                                                                                                                                               | Default value   |
-+=========================+==============================================================================================================================================================================================================+=================+
-| ``PHP_SERVER``          | ``php-fpm-5.2`` |br| ``php-fpm-5.3`` |br| ``php-fpm-5.4`` |br| ``php-fpm-5.5`` |br| ``php-fpm-5.6`` |br| ``php-fpm-7.0`` |br| ``php-fpm-7.1`` |br| ``php-fpm-7.2`` |br| ``php-fpm-7.3`` |br| ``php-fpm-7.4`` | ``php-fpm-7.2`` |
-+-------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+
+| Name                    | Allowed values                                                                                                                                                                                                                    | Default value   |
++=========================+===================================================================================================================================================================================================================================+=================+
+| ``PHP_SERVER``          | ``php-fpm-5.2`` |br| ``php-fpm-5.3`` |br| ``php-fpm-5.4`` |br| ``php-fpm-5.5`` |br| ``php-fpm-5.6`` |br| ``php-fpm-7.0`` |br| ``php-fpm-7.1`` |br| ``php-fpm-7.2`` |br| ``php-fpm-7.3`` |br| ``php-fpm-7.4`` |br| ``php-fpm-8.0`` | ``php-fpm-7.2`` |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+
 
 .. important::
    **PHP 5.2** is available to use, but it is not officially supported. The Devilbox intranet does
@@ -559,6 +587,7 @@ All values are already available in the ``.env`` file and just need to be commen
    #PHP_SERVER=php-fpm-7.2
    #PHP_SERVER=php-fpm-7.3
    #PHP_SERVER=php-fpm-7.4
+   #PHP_SERVER=php-fpm-8.0
 
 
 .. _env_httpd_server:
@@ -1183,7 +1212,7 @@ Enable any non-standard PHP modules in a comma separated list.
 +------------------------+--------------------------------------+------------------+
 
 .. note::
-   Currently only ``ioncube`` is available to enable.
+   Currently only ``ioncube`` and ``blackfire`` are available to enable.
 
 Example:
 
@@ -1194,6 +1223,33 @@ Example:
    # Enable ionCube
    PHP_MODULES_ENABLE=ioncube
 
+   # When enabling blackfire or ionCube you must also disable xdebug:
+   # https://xdebug.org/docs/install#compat
+   PHP_MODULES_DISABLE=xdebug
+
+.. code-block:: bash
+   :caption: .env
+   :emphasize-lines: 2
+
+   # Enable blackfire
+   PHP_MODULES_ENABLE=blackfire
+
+   # When enabling blackfire or ionCube you must also disable xdebug:
+   # https://xdebug.org/docs/install#compat
+   PHP_MODULES_DISABLE=xdebug
+
+.. code-block:: bash
+   :caption: .env
+   :emphasize-lines: 2
+
+   # Enable both, blackfire and ionCube
+   PHP_MODULES_ENABLE=blackfire,ioncube
+
+   # When enabling blackfire or ionCube you must also disable xdebug:
+   # https://xdebug.org/docs/install#compat
+   PHP_MODULES_DISABLE=xdebug
+
+
 .. _env_file_php_modules_disable:
 
 PHP_MODULES_DISABLE
@@ -1201,11 +1257,11 @@ PHP_MODULES_DISABLE
 
 Disable any PHP modules in a comma separated list.
 
-+-------------------------+--------------------------------------+-------------------------------------------------------------+
-| Name                    | Allowed values                       | Default value                                               |
-+=========================+======================================+=============================================================+
-| ``PHP_MODULES_DISABLE`` | comma separated list of module names | ``blackfire,oci8,PDO_OCI,pdo_sqlsrv,sqlsrv,rdkafka,swoole`` |
-+-------------------------+--------------------------------------+-------------------------------------------------------------+
++-------------------------+--------------------------------------+---------------------------------------------------+
+| Name                    | Allowed values                       | Default value                                     |
++=========================+======================================+===================================================+
+| ``PHP_MODULES_DISABLE`` | comma separated list of module names | ``oci8,PDO_OCI,pdo_sqlsrv,sqlsrv,rdkafka,swoole`` |
++-------------------------+--------------------------------------+---------------------------------------------------+
 
 Example:
 
@@ -1461,6 +1517,47 @@ than ``max_execution_time``, you will get a proper PHP error message in the brow
 +==============================+===================+==================+
 | ``HTTPD_TIMEOUT_TO_PHP_FPM`` | positive integer  | ``180``          |
 +------------------------------+-------------------+------------------+
+
+HTTPD_NGINX_WORKER_PROCESSES
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Defines the number of worker processes for Nginx, i.e, the number of CPU cores.
+
+The optimal value depends on many factors including (but not limited to) the number of CPU cores,
+the number of hard disk drives that store data, and load pattern. When one is in doubt, setting it
+to the number of available CPU cores would be a good start
+(the value “auto” will try to autodetect it).
+
++----------------------------------+-----------------------------+------------------+
+| Name                             | Allowed values              | Default value    |
++==================================+=============================+==================+
+| ``HTTPD_NGINX_WORKER_PROCESSES`` | positive integer \| `auto`  | ``auto``         |
++----------------------------------+-----------------------------+------------------+
+
+.. note:: This setting only applies to Nginx and has no effect for Apache.
+
+.. seealso:: https://nginx.org/en/docs/ngx_core_module.html#worker_processes
+
+
+HTTPD_NGINX_WORKER_CONNECTIONS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sets the maximum number of simultaneous connections that can be opened by a worker process.
+
+It should be kept in mind that this number includes all connections (e.g. connections with proxied
+servers, among others), not only connections with clients. Another consideration is that the actual
+number of simultaneous connections cannot exceed the current limit on the maximum number of open
+files, which can be changed by worker_rlimit_nofile.
+
++------------------------------------+-------------------+------------------+
+| Name                               | Allowed values    | Default value    |
++====================================+===================+==================+
+| ``HTTPD_NGINX_WORKER_CONNECTIONS`` | positive integer  | ``1024``         |
++------------------------------------+-------------------+------------------+
+
+.. note:: This setting only applies to Nginx and has no effect for Apache.
+
+.. seealso:: https://nginx.org/en/docs/ngx_core_module.html#worker_connections
 
 
 MySQL

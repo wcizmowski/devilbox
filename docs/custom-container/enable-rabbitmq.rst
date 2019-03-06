@@ -12,6 +12,7 @@ This section will guide you through getting RabbitMQ integrated into the Devilbo
    * |ext_lnk_rabbitmq_github|
    * |ext_lnk_rabbitmq_dockerhub|
    * :ref:`custom_container_enable_all_additional_container`
+   * :ref:`docker_compose_override_yml_how_does_it_work`
 
 
 **Table of Contents**
@@ -45,7 +46,7 @@ must be copied into the root of the Devilbox git directory.
 +-----------------------+------------------------------------------------------------------------------------------------------+
 | Container name        | ``rabbit``                                                                                           |
 +-----------------------+------------------------------------------------------------------------------------------------------+
-| Mount points          | ``./data/rabbit`` (can be changed via ``.env``)                                                      |
+| Mount points          | via Docker volumes                                                                                   |
 +-----------------------+------------------------------------------------------------------------------------------------------+
 | Exposed port          | ``5672`` and ``15672`` (can be changed via ``.env``)                                                 |
 +-----------------------+------------------------------------------------------------------------------------------------------+
@@ -68,15 +69,12 @@ Additionally the following ``.env`` variables can be created for easy configurat
 +------------------------------+-------------------+----------------------------------------------------------------------------+
 | ``RABBIT_SERVER``            | ``management``    | Controls the RabbitMQ version to use.                                      |
 +------------------------------+-------------------+----------------------------------------------------------------------------+
-| ``HOST_PATH_RABBIT_DATADIR`` | ``./data/rabbit`` | Default mount point for persistent data.                                   |
-+------------------------------+-------------------+----------------------------------------------------------------------------+
 | ``RABBIT_DEFAULT_VHOST``     | ``my_vhost``      | Default RabbitMQ vhost name. (not a webserver vhost name)                  |
 +------------------------------+-------------------+----------------------------------------------------------------------------+
 | ``RABBIT_DEFAULT_USER``      | ``guest``         | Default username for Admin WebUI.                                          |
 +------------------------------+-------------------+----------------------------------------------------------------------------+
 | ``RABBIT_DEFAULT_PASS``      | ``guest``         | Default password for Admin WebUI.                                          |
 +------------------------------+-------------------+----------------------------------------------------------------------------+
-
 
 
 
@@ -124,7 +122,6 @@ Add the following variables to ``.env`` and adjust them to your needs:
 
    HOST_PORT_RABBIT=5672
    HOST_PORT_RABBIT_MGMT=15672
-   HOST_PATH_RABBIT_DATADIR=./data/rabbit
 
 .. seealso:: :ref:`env_file`
 
@@ -168,7 +165,6 @@ directory:
    echo "RABBIT_DEFAULT_PASS=guest"              >> .env
    echo "HOST_PORT_RABBIT=5672"                  >> .env
    echo "HOST_PORT_RABBIT_MGMT=15672"            >> .env
-   echo "HOST_PATH_RABBIT_DATADIR=./data/rabbit" >> .env
 
    # Start container
    docker-compose up -d php httpd bind rabbit

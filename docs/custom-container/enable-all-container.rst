@@ -9,6 +9,8 @@ Enable all additional container
 Besides providing basic LAMP/MEAN stack container, which are well integrated into the Devilbox
 intranet, the Devilbox also ships additional pre-configured container that can easily be enabled.
 
+.. seealso:: :ref:`docker_compose_override_yml_how_does_it_work`
+
 
 **Table of Contents**
 
@@ -54,6 +56,8 @@ In order to fully customize each container, refer to their own documentation sec
 
 .. seealso::
    * :ref:`custom_container_enable_blackfire`
+   * :ref:`custom_container_enable_elk_stack`
    * :ref:`custom_container_enable_mailhog`
    * :ref:`custom_container_enable_rabbitmq`
    * :ref:`custom_container_enable_solr`
+   * :ref:`custom_container_enable_varnish`

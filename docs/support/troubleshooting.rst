@@ -27,6 +27,37 @@ It will grow over time once there are more issues reported.
 .. contents:: :local:
 
 
+.. _troubleshooting_what_to_do_first:
+
+What to always do first
+=======================
+
+Before going into the issues below, always do the following
+
+**1. Ensure stopped container are removed**
+
+   .. code-block:: bash
+
+      # Ensure everything is stopped
+      host> docker-compose stop
+      host> docker-compose kill
+      host> docker-compose rm -f
+
+**2. Ensure config is normalized**
+
+   .. code-block:: bash
+
+      # Ensure .env file is normalized
+      host> cp env-example .env
+
+**3. Statup minimal**
+
+   .. code-block:: bash
+
+      # Test everything with the minimal stack
+      host> docker-compose up php httpd bind
+
+
 General
 =======
 
@@ -38,7 +69,7 @@ experience similar issues as well, check for any unattended Windows updates or
 updates to Docker itself. If those exist, try to revert them and see if that was the cause.
 
 I heard many bug stories from fellow Windows users so far.
-A good contact point for that is the Docker forum itself: https://forums.docker.com/c/docker-for-windows
+A good contact point for that is the Docker forum itself: https://forums.docker.com/c/docker-desktop-for-windows
 
 A few general things you should always do before attempting to open up issues are:
 
@@ -300,3 +331,23 @@ to read-only by applying the following ``chmod`` command.
 .. seealso::
    * :ref:`my_cnf`
    * https://github.com/cytopia/devilbox/issues/212
+
+
+Docker Toolbox
+==============
+
+ln: creating symbolic link './foo': Read-only file system
+----------------------------------------------------------
+
+VirtualBox might not allow symlinks by default on other directories. This can however be fixed
+manually via.
+
+.. code-block:: bash
+
+   # <DIR> is the VirtualBox shared directory
+   host> VBoxManage setextradata default VBoxInternal2/SharedFoldersEnableSymlinksCreate/<DIR> 1
+
+
+.. seealso:: For detailed example see here:
+
+  * Docker Toolbox on Windows: :ref:`howto_docker_toolbox_and_the_devilbox_windows_symlinks`

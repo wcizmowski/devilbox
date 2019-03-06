@@ -5,7 +5,7 @@
 ![Devilbox](docs/img/banner.png)
 
 **[Usage](#usage)** |
-**[Available Container](#available-container)** |
+**[Architecture](#architecture)** |
 **[Community](#community)** |
 **[Features](#feature-overview)** |
 **[Intranet](#intranet-overview)** |
@@ -18,9 +18,12 @@
 
 [![Build Status](https://travis-ci.org/cytopia/devilbox.svg?branch=master)](https://travis-ci.org/cytopia/devilbox)
 [![Documentation Status](https://readthedocs.org/projects/devilbox/badge/?version=latest)](https://devilbox.readthedocs.io)
-![Tag](https://img.shields.io/github/tag/cytopia/devilbox.svg)
-[![type](https://img.shields.io/badge/type-Docker-red.svg)](https://www.docker.com/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Release](https://img.shields.io/github/release/cytopia/devilbox.svg?colorB=orange)](https://github.com/cytopia/devilbox/releases)
+[![PreRelease](https://img.shields.io/github/release/cytopia/devilbox.svg?colorB=red&label=prelease&style=flat)](https://github.com/cytopia/devilbox/releases)
+[![Gitter](https://badges.gitter.im/devilbox/Lobby.svg)](https://gitter.im/devilbox/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Discourse](https://img.shields.io/discourse/https/devilbox.discourse.group/status.svg?colorB=%234CB697)](https://devilbox.discourse.group)
+[![type](https://img.shields.io/badge/type-Docker-blue.svg)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/license-MIT-%233DA639.svg)](https://opensource.org/licenses/MIT)
 
 <img width="200" style="width:200px;" src="docs/_includes/figures/https/https-ssl-address-bar.png" /><br/>
 <small><sub>Support for <a href="https://devilbox.readthedocs.io/en/latest/intermediate/setup-valid-https.html">valid https</a> out of the box.</sub></small>
@@ -45,16 +48,47 @@ Furthermore, the Devilbox provides an **identical** and **reproducible developme
 * [Docker Engine 1.12.0+](https://docs.docker.com/compose/compose-file/compose-versioning/#version-21)
 * [Docker Compose 1.9.0+](https://docs.docker.com/compose/compose-file/compose-versioning/#version-21)
 
-## Available Container
+**Important**
 
-The Devilbox ships the following pre-configured Docker container in any available version.
+Before updating the Devilbox ensure to always check for breaking changes until the stable release is out:
 
-| Web server | SQL        | NoSQL     | Queue & Search | Misc      |
-|------------|------------|-----------|----------------|-----------|
-| Apache     | MariaDB    | Memcached | RabbitMQ       | Bind      |
-| Nginx      | MySQL      | MongoDB   | Solr           | Blackfire |
-|            | PerconaDB  | Redis     |                | MailHog   |
-|            | PostgreSQL |           |                | PHP       |
+1. [Forum: Announcements](https://devilbox.discourse.group/c/announcements)
+2. [Changelog](CHANGELOG.md)
+3. [Updating](UPDATING.md)
+
+## Architecture
+
+The Devilbox aims to be a swiss army knife for local development by providing you all the services
+you would ever need. To get an idea about the architecture behind it and to also see what's available
+have a look at the following diagrams and tables.
+
+#### Smallest Stack
+This is the smallest possible and fully functional stack you can run:
+
+<img width="300" style="width:300px" title="Devilbox stack" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_diagrams/cytopia/02/png/architecture-small.png" />
+
+> [Devilbox artwork](https://github.com/devilbox/artwork)
+
+#### Full Stack
+To better understand what is actually possible have a look at the full example:
+
+<img title="Devilbox stack" src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_diagrams/cytopia/01/png/architecture-full.png" />
+
+> [Devilbox artwork](https://github.com/devilbox/artwork)
+
+#### Available Container
+
+The following table lists all integrated and pre-configured Docker container shipped by the Devilbox.
+Only the webserver and PHP container are mandatory, all others are optional and don't need to be started.
+
+Each of them is also available in multiple different versions in order to reflect your exact desired environment.
+
+| Accel   | Frontend   | SQL        | NoSQL     | Queue    | Search | ELK           | Utils     |
+|---------|------------|------------|-----------|----------|--------|---------------|-----------|
+| HAProxy | Apache     | MariaDB    | Memcached | RabbitMQ | Solr   | ElasticSearch | Bind      |
+| Varnish | Nginx      | MySQL      | MongoDB   |          |        | Logstash      | Blackfire |
+|         | PHP        | PerconaDB  | Redis     |          |        | Kibana        | MailHog   |
+|         |            | PostgreSQL |           |          |        |               |           |
 
 > **Documentation:**
 > [Available Container](https://devilbox.readthedocs.io/en/latest/readings/available-container.html)
@@ -81,7 +115,7 @@ simplify your every-day life. If you ever run into any unforseen issues, feel fr
   <tr>
    <td>
     <a target="_blank" href="https://devilbox.readthedocs.io">
-	 <img title="Documentation" name="Documentation" src="https://raw.githubusercontent.com/cytopia/icons/master/400x400/readthedocs.png" />
+     <img title="Documentation" name="Documentation" src="https://raw.githubusercontent.com/cytopia/icons/master/400x400/readthedocs.png" />
     </a>
    </td>
    <td>
@@ -91,8 +125,8 @@ simplify your every-day life. If you ever run into any unforseen issues, feel fr
    </td>
    <td>
     <a target="_blank" href="https://devilbox.discourse.group">
-	 <img title="Devilbox Forums" name="Forum" src="https://raw.githubusercontent.com/cytopia/icons/master/400x400/discourse.png" />
-	</a>
+     <img title="Devilbox Forums" name="Forum" src="https://raw.githubusercontent.com/cytopia/icons/master/400x400/discourse.png" />
+    </a>
    </td>
   </tr>
   <tr>
@@ -296,14 +330,25 @@ Every single attachable container comes with many different versions. In order t
       <td></td>
       <td></td>
     </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><a target="_blank" title="PHP 8.0"          href="https://github.com/devilbox/docker-php-fpm">8.0</a><sup>[2]</sup></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>
 
 <strong><sup>[1]</sup></strong> <strong>PHP 5.2</strong> is available to use, but it is not officially supported. The Devilbox intranet does not work with this version as PHP 5.2 does not support namespaces.
 Furthermore PHP 5.2 does only work with Apache 2.4, Nginx stable and Nginx mainline. It does not work with Apache 2.2. Use at your own risk.
 
-<strong><sup>[2]</sup></strong> <strong>PHP 7.4</strong> is the upcoming unreleased version of PHP, which is directly built out of their [master](https://github.com/php/php-src/) branch.
-It will improve every day as the image is rebuilt every day from the latest commits.
+<strong><sup>[2]</sup></strong> <strong>PHP 7.4</strong> and <strong>PHP 8.0</strong> are upcoming unreleased versions of PHP, which are directly built out of their [official git branches](https://github.com/php/php-src/) every night to assure you will leverage their latest features.
 
 > **Documentation:**
 > [Change container versions](https://devilbox.readthedocs.io/en/latest/getting-started/change-container-versions.html)
@@ -316,35 +361,50 @@ Additionally to the default stack, there are a variety of other services that ca
  <thead>
   <tr>
    <th>Blackfire</th>
+   <th>ELK</th>
    <th>MailHog</th>
    <th>RabbitMQ</th>
    <th>Solr</th>
+   <th>HAProxy</th>
+   <th>Varnish</th>
   </tr>
  </thead>
  <tbody>
   <tr>
    <td><a target="_blank" title="Blackfire 1.8"    href="https://github.com/blackfireio/docker">1.8</a></td>
+   <td><a target="_blank" title="ELK stack"        href="https://www.docker.elastic.co">5.x.y</a></td>
    <td><a target="_blank" title="MailHog v1.0.0"   href="https://github.com/mailhog/MailHog">v1.0.0</a></td>
    <td><a target="_blank" title="RabbitMQ 3.6"     href="https://github.com/rabbitmq/rabbitmq-server">3.6</a></td>
    <td><a target="_blank" title="Solr 5"           href="https://github.com/apache/lucene-solr">5</a></td>
+   <td><a target="_blank" title="HAProxy 1.X"      href="https://github.com/devilbox/docker-haproxy">1.X</a></td>
+   <td><a target="_blank" title="Varnish 4"        href="https://github.com/devilbox/docker-varnish">4</a></td>
   </tr>
   <tr>
    <td>...</td>
+   <td><a target="_blank" title="ELK stack"        href="https://www.docker.elastic.co">6.x.y</a></td>
    <td><a target="_blank" title="MailHog latest"   href="https://github.com/mailhog/MailHog">latest</a></td>
    <td><a target="_blank" title="RabbitMQ 3.7"     href="https://github.com/rabbitmq/rabbitmq-server">3.7</a></td>
    <td><a target="_blank" title="Solr 6"           href="https://github.com/apache/lucene-solr">6</a></td>
+   <td></td>
+   <td><a target="_blank" title="Varnish 5"        href="https://github.com/devilbox/docker-varnish">5</a></td>
   </tr>
   <tr>
    <td><a target="_blank" title="Blackfire 1.18.0" href="https://github.com/blackfireio/docker">1.18.0</a></td>
+   <td><a target="_blank" title="ELK stack"        href="https://www.docker.elastic.co">7.x.y</a></td>
    <td></td>
    <td><a target="_blank" title="RabbitMQ latest"  href="https://github.com/rabbitmq/rabbitmq-server">latest</a></td>
    <td><a target="_blank" title="Solr 7"           href="https://github.com/apache/lucene-solr">7</a></td>
+   <td></td>
+   <td><a target="_blank" title="Varnish 6"        href="https://github.com/devilbox/docker-varnish">6</a></td>
   </tr>
   <tr>
    <td><a target="_blank" title="Blackfire latest" href="https://github.com/blackfireio/docker">latest</a></td>
    <td></td>
    <td></td>
+   <td></td>
    <td><a target="_blank" title="Solr latest"      href="https://github.com/apache/lucene-solr">latest</a></td>
+   <td></td>
+   <td><a target="_blank" title="Varnish latest"   href="https://github.com/devilbox/docker-varnish">latest</a></td>
   </tr>
  </tbody>
 </table>
@@ -402,11 +462,15 @@ The Devilbox has everything setup for you. The only thing you will have to insta
 <table>
 <tbody>
   <tr>
-    <td width="220" style="width:220px;">:star: HTTP/2 support</td>
+    <td width="220" style="width:220px;">:star: HTTPS support</td>
+    <td>HTTPS is available by default for all projects and the bundled Intranet.</td>
+  </tr>
+  <tr>
+    <td>:star: HTTP/2 support</td>
     <td>All HTTPS connections will offer <a href="https://en.wikipedia.org/wiki/HTTP/2">HTTP/2</a> as the default protocol, except for Apache 2.2 which does not support it.</td>
   </tr>
   <tr>
-    <td width="220" style="width:220px;">:star: Auto virtual hosts</td>
+    <td>:star: Auto virtual hosts</td>
     <td>New virtual hosts are created automatically and instantly whenever you add a project directory. This is done internally via <a href="https://travis-ci.org/devilbox/vhost-gen">vhost-gen</a> and <a href="https://github.com/devilbox/watcherd">watcherd</a>.</td>
   </tr>
   <tr>
@@ -614,104 +678,104 @@ The Devilbox is a development stack, so it is made sure that a lot of PHP module
 > * Available, but disabled (can be enabled): **d**
 
 <!-- modules -->
-| Modules        | PHP 5.2 | PHP 5.3 | PHP 5.4 | PHP 5.5 | PHP 5.6 | PHP 7.0 | PHP 7.1 | PHP 7.2 | PHP 7.3 | PHP 7.4 |
-|----------------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|
-| amqp           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
-| apc            |         |    🗸    |    🗸    |    🗸    |    🗸    |         |         |         |         |         |
-| apcu           |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |
-| bcmath         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| blackfire      |         |         |         |         |    d    |    d    |    d    |    d    |    d    |         |
-| bz2            |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| calendar       |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| Core           |         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| ctype          |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| curl           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| date           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| dba            |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| dom            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| enchant        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| ereg           |         |    ✔    |    ✔    |    ✔    |    ✔    |         |         |         |         |         |
-| exif           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| FFI            |         |         |         |         |         |         |         |         |         |    🗸    |
-| fileinfo       |    🗸    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| filter         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| ftp            |    🗸    |    🗸    |    🗸    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| gd             |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| gettext        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| gmp            |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| hash           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| iconv          |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| igbinary       |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| imagick        |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |
-| imap           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |
-| interbase      |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| intl           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| ioncube        |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |         |         |
-| json           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| ldap           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| libxml         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| mbstring       |    ✔    |    🗸    |    🗸    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| mcrypt         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
-| memcache       |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
-| memcached      |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| mhash          |         |         |         |         |    ✔    |         |         |         |         |         |
-| mongo          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |         |         |         |
-| mongodb        |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| msgpack        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |
-| mysql          |    ✔    |    ✔    |    🗸    |    🗸    |    🗸    |         |         |         |         |         |
-| mysqli         |    ✔    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| mysqlnd        |         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| oci8           |         |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |
-| openssl        |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| pcntl          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| pcre           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| PDO            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| pdo_dblib      |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| PDO_Firebird   |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| pdo_mysql      |    ✔    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| PDO_OCI        |         |         |         |         |         |    d    |    d    |    d    |    d    |    d    |
-| pdo_pgsql      |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| pdo_sqlite     |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| pdo_sqlsrv     |         |         |         |         |         |    d    |    d    |    d    |    d    |         |
-| pgsql          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| phalcon        |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |
-| Phar           |    🗸    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| posix          |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| pspell         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| rdkafka        |         |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |
-| readline       |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| recode         |    🗸    |    ✔    |    ✔    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| redis          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| Reflection     |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| session        |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| shmop          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| SimpleXML      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| snmp           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| soap           |    ✔    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| sockets        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| sodium         |         |         |         |         |         |         |         |    ✔    |    ✔    |    ✔    |
-| SPL            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| SQLite         |    ✔    |    ✔    |         |         |         |         |         |         |         |         |
-| sqlite3        |         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| sqlsrv         |         |         |         |         |         |    d    |    d    |    d    |    d    |         |
-| standard       |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| swoole         |         |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |
-| sysvmsg        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| sysvsem        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| sysvshm        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| tidy           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| tokenizer      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| uploadprogress |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| wddx           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| xdebug         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |
-| xml            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| xmlreader      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| xmlrpc         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| xmlwriter      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
-| xsl            |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| Zend OPcache   |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| zip            |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| zlib           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| Modules        | PHP 5.2 | PHP 5.3 | PHP 5.4 | PHP 5.5 | PHP 5.6 | PHP 7.0 | PHP 7.1 | PHP 7.2 | PHP 7.3 | PHP 7.4 | PHP 8.0 |
+|----------------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|
+| amqp           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |         |
+| apc            |         |    🗸    |    🗸    |    🗸    |    🗸    |         |         |         |         |         |         |
+| apcu           |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
+| bcmath         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| blackfire      |         |         |         |         |    d    |    d    |    d    |    d    |    d    |         |         |
+| bz2            |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| calendar       |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| Core           |         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| ctype          |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| curl           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| date           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| dba            |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| dom            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| enchant        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| ereg           |         |    ✔    |    ✔    |    ✔    |    ✔    |         |         |         |         |         |         |
+| exif           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| FFI            |         |         |         |         |         |         |         |         |         |    🗸    |    🗸    |
+| fileinfo       |    🗸    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| filter         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| ftp            |    🗸    |    🗸    |    🗸    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| gd             |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| gettext        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| gmp            |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| hash           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| iconv          |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| igbinary       |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |
+| imagick        |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
+| imap           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
+| interbase      |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| intl           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| ioncube        |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |         |         |         |
+| json           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| ldap           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| libxml         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| mbstring       |    ✔    |    🗸    |    🗸    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| mcrypt         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
+| memcache       |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |         |
+| memcached      |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| mhash          |         |         |         |         |    ✔    |         |         |         |         |         |         |
+| mongo          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |         |         |         |         |
+| mongodb        |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| msgpack        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
+| mysql          |    ✔    |    ✔    |    🗸    |    🗸    |    🗸    |         |         |         |         |         |         |
+| mysqli         |    ✔    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| mysqlnd        |         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| oci8           |         |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |
+| openssl        |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| pcntl          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| pcre           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| PDO            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| pdo_dblib      |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| PDO_Firebird   |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| pdo_mysql      |    ✔    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| PDO_OCI        |         |         |         |         |         |    d    |    d    |    d    |    d    |    d    |    d    |
+| pdo_pgsql      |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| pdo_sqlite     |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| pdo_sqlsrv     |         |         |         |         |         |    d    |    d    |    d    |    d    |         |         |
+| pgsql          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| phalcon        |         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
+| Phar           |    🗸    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| posix          |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| pspell         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| rdkafka        |         |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |         |
+| readline       |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| recode         |    🗸    |    ✔    |    ✔    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| redis          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| Reflection     |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| session        |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| shmop          |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| SimpleXML      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| snmp           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| soap           |    ✔    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| sockets        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| sodium         |         |         |         |         |         |         |         |    ✔    |    ✔    |    ✔    |    ✔    |
+| SPL            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| SQLite         |    ✔    |    ✔    |         |         |         |         |         |         |         |         |         |
+| sqlite3        |         |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| sqlsrv         |         |         |         |         |         |    d    |    d    |    d    |    d    |         |         |
+| standard       |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| swoole         |         |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |    d    |         |
+| sysvmsg        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| sysvsem        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| sysvshm        |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| tidy           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| tokenizer      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| uploadprogress |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| wddx           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| xdebug         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
+| xml            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| xmlreader      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| xmlrpc         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| xmlwriter      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
+| xsl            |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| Zend OPcache   |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| zip            |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| zlib           |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
 <!-- /modules -->
 
 > * Core enabled (cannot be disabled): **✔**
@@ -827,11 +891,21 @@ A few examples of how the built-in intranet looks like.
 The Devilbox is still a young project with a long roadmap of features to come. Features are
 decided by you - **the community**, so any kind of contribution is welcome.
 
+[![](https://sourcerer.io/fame/cytopia/cytopia/devilbox/images/0)](https://sourcerer.io/fame/cytopia/cytopia/devilbox/links/0)
+[![](https://sourcerer.io/fame/cytopia/cytopia/devilbox/images/1)](https://sourcerer.io/fame/cytopia/cytopia/devilbox/links/1)
+[![](https://sourcerer.io/fame/cytopia/cytopia/devilbox/images/2)](https://sourcerer.io/fame/cytopia/cytopia/devilbox/links/2)
+[![](https://sourcerer.io/fame/cytopia/cytopia/devilbox/images/3)](https://sourcerer.io/fame/cytopia/cytopia/devilbox/links/3)
+[![](https://sourcerer.io/fame/cytopia/cytopia/devilbox/images/4)](https://sourcerer.io/fame/cytopia/cytopia/devilbox/links/4)
+[![](https://sourcerer.io/fame/cytopia/cytopia/devilbox/images/5)](https://sourcerer.io/fame/cytopia/cytopia/devilbox/links/5)
+[![](https://sourcerer.io/fame/cytopia/cytopia/devilbox/images/6)](https://sourcerer.io/fame/cytopia/cytopia/devilbox/links/6)
+[![](https://sourcerer.io/fame/cytopia/cytopia/devilbox/images/7)](https://sourcerer.io/fame/cytopia/cytopia/devilbox/links/7)
+
 To increase visibility and bug-free operation:
 
 * Star this project
 * Open up issues for bugs and feature requests
 * Clone this project and submit fixes or features
+* Visit the [Devilbox Community Forums](https://devilbox.discourse.group) for announcements and to help others
 
 Additionally you can [subscribe to Devilbox on CodeTriage](https://www.codetriage.com/cytopia/devilbox),
 read up on [CONTRIBUTING.md](CONTRIBUTING.md) and check the [ROADMAP](https://github.com/cytopia/devilbox/issues/23) about what is already planned for the near future.
@@ -844,6 +918,6 @@ Logos and banners can be found at **[devilbox/artwork](https://github.com/devilb
 
 ## License
 
-[MIT License](LICENSE.md)
+**[MIT License](LICENSE.md)**
 
-Copyright (c) 2016 [cytopia](https://github.com/cytopia)
+Copyright (c) 2016 **[cytopia](https://github.com/cytopia)**

@@ -95,7 +95,7 @@ services:
   # PHP
   # ------------------------------------------------------------
   php:
-    image: devilbox/php-fpm:${PHP_SERVER}-work-0.72
+    image: devilbox/php-fpm:${PHP_SERVER}-work-0.78
     hostname: php
 
     ##
@@ -175,7 +175,7 @@ services:
       - ${DEVILBOX_PATH}/log/php-fpm-${PHP_SERVER}:/var/log/php:rw${MOUNT_OPTIONS}
 
       # Mount Mail directory
-      - ${DEVILBOX_PATH}/mail:/var/mail:rw${MOUNT_OPTIONS}
+      - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
 
       # Mount DB Backup directory
       - ${DEVILBOX_PATH}/backups:/shared/backups:rw${MOUNT_OPTIONS}
@@ -210,7 +210,7 @@ services:
   # Web Server
   # ------------------------------------------------------------
   httpd:
-    image: devilbox/${HTTPD_SERVER}:0.28
+    image: devilbox/${HTTPD_SERVER}:0.30
     hostname: httpd
 
     environment:
@@ -232,6 +232,12 @@ services:
       ##
       - NEW_UID
       - NEW_GID
+
+      ##
+      ## Nginx specific worker/connection settings
+      ##
+      - WORKER_PROCESSES=${HTTPD_NGINX_WORKER_PROCESSES:-auto}
+      - WORKER_CONNECTIONS=${HTTPD_NGINX_WORKER_CONNECTIONS:-1024}
 
       ##
       ## Disable default vhost?
@@ -503,3 +509,12 @@ networks:
       config:
         - subnet: 172.16.238.0/24
           gateway: 172.16.238.1
+
+################################################################################
+# VOLUMES
+################################################################################
+volumes:
+  # ------------------------------------------------------------
+  # Misc
+  # ------------------------------------------------------------
+  devilbox-mail:

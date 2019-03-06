@@ -20,6 +20,10 @@ The only thing you will have to do is to create a new directory on the filesyste
 host is ready to be served with your custom domain.
 
 
+.. raw:: html
+
+   <img src="https://raw.githubusercontent.com/devilbox/artwork/master/submissions_diagrams/cytopia/01/png/architecture-full.png" />
+
 .. important::
    :ref:`read_first`
     Ensure you have read this document to understand how this documentation works.
@@ -46,6 +50,7 @@ host is ready to be served with your custom domain.
    getting-started/create-your-first-project
    getting-started/enter-the-php-container
    getting-started/change-container-versions
+   getting-started/important
 
 
 .. toctree::
@@ -114,9 +119,11 @@ host is ready to be served with your custom domain.
 
    custom-container/enable-all-container
    custom-container/enable-blackfire
+   custom-container/enable-elk-stack
    custom-container/enable-mailhog
    custom-container/enable-rabbitmq
    custom-container/enable-solr
+   custom-container/enable-varnish
 
 
 .. toctree::
