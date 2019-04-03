@@ -231,6 +231,12 @@
      Text-mode Interface for Git <img src="https://raw.githubusercontent.com/cytopia/icons/master/11x11/ext-link.png" />
    </a>
 
+.. |ext_lnk_tool_vue| raw:: html
+
+   <a target="_blank" href="https://cli.vuejs.org">
+     Standard Tooling for Vue.js Development <img src="https://raw.githubusercontent.com/cytopia/icons/master/11x11/ext-link.png" />
+   </a>
+
 .. |ext_lnk_tool_webpack| raw:: html
 
    <a target="_blank" href="https://webpack.js.org">
@@ -289,6 +295,12 @@
 
    <a target="_blank" href="https://github.com/sasanrose/phpredmin">
      phpRedMin <img src="https://raw.githubusercontent.com/cytopia/icons/master/11x11/ext-link.png" />
+   </a>
+
+.. |ext_lnk_tool_phpmemcachedadmin| raw:: html
+
+   <a target="_blank" href="https://github.com/elijaa/phpmemcachedadmin">
+     PHPMemcachedAdmin <img src="https://raw.githubusercontent.com/cytopia/icons/master/11x11/ext-link.png" />
    </a>
 
 .. |ext_lnk_tool_opcachegui| raw:: html

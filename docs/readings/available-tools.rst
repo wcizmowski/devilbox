@@ -1,4 +1,5 @@
 .. include:: /_includes/all.rst
+.. include:: /_includes/snippets/__ANNOUNCEMENTS__.rst
 
 .. _available_tools:
 
@@ -89,6 +90,8 @@ The PHP container is your workhorse and these are your tools:
 | ``symfony``          | |ext_lnk_tool_symfony|                |
 +----------------------+---------------------------------------+
 | ``tig``              | |ext_lnk_tool_tig|                    |
++----------------------+---------------------------------------+
+| ``vue``              | |ext_lnk_tool_vue|                    |
 +----------------------+---------------------------------------+
 | ``webpack``          | |ext_lnk_tool_webpack|                |
 +----------------------+---------------------------------------+

@@ -1,3 +1,5 @@
+.. include:: /_includes/snippets/__ANNOUNCEMENTS__.rst
+
 .. _read_first:
 
 **********
@@ -39,8 +41,8 @@ Checklists
 ==========
 
 .. note::
-   Most guids and tutorials provide a **Checklist** at the very bottom.
-   You can as well jump to it and quickly see if you have done everything already.
+   Most guides and tutorials provide a **Checklist** at the very bottom.
+   You can jump to it and quickly see if you have done everything already.
 
 
 Where to start?

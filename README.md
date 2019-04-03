@@ -88,7 +88,7 @@ Each of them is also available in multiple different versions in order to reflec
 | HAProxy | Apache     | MariaDB    | Memcached | RabbitMQ | Solr   | ElasticSearch | Bind      |
 | Varnish | Nginx      | MySQL      | MongoDB   |          |        | Logstash      | Blackfire |
 |         | PHP        | PerconaDB  | Redis     |          |        | Kibana        | MailHog   |
-|         |            | PostgreSQL |           |          |        |               |           |
+|         |            | PostgreSQL |           |          |        |               | Ngrok     |
 
 > **Documentation:**
 > [Available Container](https://devilbox.readthedocs.io/en/latest/readings/available-container.html)
@@ -214,9 +214,9 @@ Every single attachable container comes with many different versions. In order t
       <td><a target="_blank" title="Apache 2.2"       href="https://github.com/devilbox/docker-apache-2.2">2.2</a></td>
       <td><a target="_blank" title="Nginx stable"     href="https://github.com/devilbox/docker-nginx-stable">stable</a></td>
       <td><a target="_blank" title="PHP 5.2"          href="https://github.com/devilbox/docker-php-fpm">5.2</a><sup>[1]</sup></td>
-      <td><a target="_blank" title="MySQL 5.5"        href="https://github.com/cytopia/docker-mysql-5.5">5.5</a></td>
-      <td><a target="_blank" title="MariaDB 5.5"      href="https://github.com/cytopia/docker-mariadb-5.5">5.5</a></td>
-      <td><a target="_blank" title="PerconaDB 5.5"    href="https://github.com/cytopia/docker-percona-5.5">5.5</a></td>
+      <td><a target="_blank" title="MySQL 5.5"        href="https://github.com/devilbox/docker-mysql">5.5</a></td>
+      <td><a target="_blank" title="MariaDB 5.5"      href="https://github.com/devilbox/docker-mysql">5.5</a></td>
+      <td><a target="_blank" title="PerconaDB 5.5"    href="https://github.com/devilbox/docker-mysql">5.5</a></td>
       <td><a target="_blank" title="PgSQL 9.0"        href="https://github.com/docker-library/postgres">9.0</a></td>
       <td><a target="_blank" title="Redis 2.8"        href="https://github.com/docker-library/redis">2.8</a></td>
       <td><a target="_blank" title="Memcached 1.4"    href="https://github.com/docker-library/memcached">1.4</a></td>
@@ -226,9 +226,9 @@ Every single attachable container comes with many different versions. In order t
       <td><a target="_blank" title="Apache 2.4"       href="https://github.com/devilbox/docker-apache-2.4">2.4</a></td>
       <td><a target="_blank" title="Nginx mainline"   href="https://github.com/devilbox/docker-nginx-mainline">mainline</a></td>
       <td><a target="_blank" title="PHP 5.3"          href="https://github.com/devilbox/docker-php-fpm">5.3</a></td>
-      <td><a target="_blank" title="MySQL 5.6"        href="https://github.com/cytopia/docker-mysql-5.6">5.6</a></td>
-      <td><a target="_blank" title="MariaDB 10.0"     href="https://github.com/cytopia/docker-mariadb-10.0">10.0</a></td>
-      <td><a target="_blank" title="PerconaDB 5.6"    href="https://github.com/cytopia/docker-percona-5.6">5.6</a></td>
+      <td><a target="_blank" title="MySQL 5.6"        href="https://github.com/devilbox/docker-mysql">5.6</a></td>
+      <td><a target="_blank" title="MariaDB 10.0"     href="https://github.com/devilbox/docker-mysql">10.0</a></td>
+      <td><a target="_blank" title="PerconaDB 5.6"    href="https://github.com/devilbox/docker-mysql">5.6</a></td>
       <td><a target="_blank" title="PgSQL 9.1"        href="https://github.com/docker-library/postgres">9.1</a></td>
       <td><a target="_blank" title="Redis 3.0"        href="https://github.com/docker-library/redis">3.0</a></td>
       <td><a target="_blank" title="Memcached 1.5"    href="https://github.com/docker-library/memcached">1.5</a></td>
@@ -238,9 +238,9 @@ Every single attachable container comes with many different versions. In order t
       <td></td>
       <td></td>
       <td><a target="_blank" title="PHP 5.4"          href="https://github.com/devilbox/docker-php-fpm">5.4</a></td>
-      <td><a target="_blank" title="MySQL 5.7"        href="https://github.com/cytopia/docker-mysql-5.7">5.7</a></td>
-      <td><a target="_blank" title="MariaDB 10.1"     href="https://github.com/cytopia/docker-mariadb-10.1">10.1</a></td>
-      <td><a target="_blank" title="PerconaDB 5.7"    href="https://github.com/cytopia/docker-percona-5.7">5.7</a></td>
+      <td><a target="_blank" title="MySQL 5.7"        href="https://github.com/devilbox/docker-mysql">5.7</a></td>
+      <td><a target="_blank" title="MariaDB 10.1"     href="https://github.com/devilbox/docker-mysql">10.1</a></td>
+      <td><a target="_blank" title="PerconaDB 5.7"    href="https://github.com/devilbox/docker-mysql">5.7</a></td>
       <td><a target="_blank" title="PgSQL 9.2"        href="https://github.com/docker-library/postgres">9.2</a></td>
       <td><a target="_blank" title="Redis 3.2"        href="https://github.com/docker-library/redis">3.2</a></td>
       <td><a target="_blank" title="Memcached latest" href="https://github.com/docker-library/memcached">latest</a></td>
@@ -250,9 +250,9 @@ Every single attachable container comes with many different versions. In order t
       <td></td>
       <td></td>
       <td><a target="_blank" title="PHP 5.5"          href="https://github.com/devilbox/docker-php-fpm">5.5</a></td>
-      <td><a target="_blank" title="MySQL 8.0"        href="https://github.com/cytopia/docker-mysql-8.0">8.0</a></td>
-      <td><a target="_blank" title="MariaDB 10.2"     href="https://github.com/cytopia/docker-mariadb-10.2">10.2</a></td>
-      <td></td>
+      <td><a target="_blank" title="MySQL 8.0"        href="https://github.com/devilbox/docker-mysql">8.0</a></td>
+      <td><a target="_blank" title="MariaDB 10.2"     href="https://github.com/devilbox/docker-mysql">10.2</a></td>
+      <td><a target="_blank" title="PerconaDB 8.0"    href="https://github.com/devilbox/docker-mysql">8.0</a></td>
       <td><a target="_blank" title="PgSQL 9.3"        href="https://github.com/docker-library/postgres">9.3</a></td>
       <td><a target="_blank" title="Redis 4.0"        href="https://github.com/docker-library/redis">4.0</a></td>
       <td></td>
@@ -263,7 +263,7 @@ Every single attachable container comes with many different versions. In order t
       <td></td>
       <td><a target="_blank" title="PHP 5.6"          href="https://github.com/devilbox/docker-php-fpm">5.6</a></td>
       <td></td>
-      <td><a target="_blank" title="MariaDB 10.3"     href="https://github.com/cytopia/docker-mariadb-10.3">10.3</a></td>
+      <td><a target="_blank" title="MariaDB 10.3"     href="https://github.com/devilbox/docker-mysql">10.3</a></td>
       <td></td>
       <td><a target="_blank" title="PgSQL 9.4"        href="https://github.com/docker-library/postgres">9.4</a></td>
       <td><a target="_blank" title="Redis 5.0"        href="https://github.com/docker-library/redis">5.0</a></td>
@@ -275,7 +275,7 @@ Every single attachable container comes with many different versions. In order t
       <td></td>
       <td><a target="_blank" title="PHP 7.0"          href="https://github.com/devilbox/docker-php-fpm">7.0</a></td>
       <td></td>
-      <td></td>
+      <td><a target="_blank" title="MariaDB 10.4"     href="https://github.com/devilbox/docker-mysql">10.4</a></td>
       <td></td>
       <td><a target="_blank" title="PgSQL 9.5"        href="https://github.com/docker-library/postgres">9.5</a></td>
       <td><a target="_blank" title="Redis latest"     href="https://github.com/docker-library/redis">latest</a></td>
@@ -363,6 +363,7 @@ Additionally to the default stack, there are a variety of other services that ca
    <th>Blackfire</th>
    <th>ELK</th>
    <th>MailHog</th>
+   <th>Ngrok</th>
    <th>RabbitMQ</th>
    <th>Solr</th>
    <th>HAProxy</th>
@@ -374,15 +375,17 @@ Additionally to the default stack, there are a variety of other services that ca
    <td><a target="_blank" title="Blackfire 1.8"    href="https://github.com/blackfireio/docker">1.8</a></td>
    <td><a target="_blank" title="ELK stack"        href="https://www.docker.elastic.co">5.x.y</a></td>
    <td><a target="_blank" title="MailHog v1.0.0"   href="https://github.com/mailhog/MailHog">v1.0.0</a></td>
+   <td><a target="_blank" title="Ngrok 2.x"        href="https://github.com/devilbox/docker-ngrok">2.x</a></td>
    <td><a target="_blank" title="RabbitMQ 3.6"     href="https://github.com/rabbitmq/rabbitmq-server">3.6</a></td>
    <td><a target="_blank" title="Solr 5"           href="https://github.com/apache/lucene-solr">5</a></td>
-   <td><a target="_blank" title="HAProxy 1.X"      href="https://github.com/devilbox/docker-haproxy">1.X</a></td>
+   <td><a target="_blank" title="HAProxy 1.x"      href="https://github.com/devilbox/docker-haproxy">1.x</a></td>
    <td><a target="_blank" title="Varnish 4"        href="https://github.com/devilbox/docker-varnish">4</a></td>
   </tr>
   <tr>
    <td>...</td>
    <td><a target="_blank" title="ELK stack"        href="https://www.docker.elastic.co">6.x.y</a></td>
    <td><a target="_blank" title="MailHog latest"   href="https://github.com/mailhog/MailHog">latest</a></td>
+   <td></td>
    <td><a target="_blank" title="RabbitMQ 3.7"     href="https://github.com/rabbitmq/rabbitmq-server">3.7</a></td>
    <td><a target="_blank" title="Solr 6"           href="https://github.com/apache/lucene-solr">6</a></td>
    <td></td>
@@ -392,6 +395,7 @@ Additionally to the default stack, there are a variety of other services that ca
    <td><a target="_blank" title="Blackfire 1.18.0" href="https://github.com/blackfireio/docker">1.18.0</a></td>
    <td><a target="_blank" title="ELK stack"        href="https://www.docker.elastic.co">7.x.y</a></td>
    <td></td>
+   <td></td>
    <td><a target="_blank" title="RabbitMQ latest"  href="https://github.com/rabbitmq/rabbitmq-server">latest</a></td>
    <td><a target="_blank" title="Solr 7"           href="https://github.com/apache/lucene-solr">7</a></td>
    <td></td>
@@ -399,6 +403,7 @@ Additionally to the default stack, there are a variety of other services that ca
   </tr>
   <tr>
    <td><a target="_blank" title="Blackfire latest" href="https://github.com/blackfireio/docker">latest</a></td>
+   <td></td>
    <td></td>
    <td></td>
    <td></td>
@@ -545,6 +550,7 @@ The following batteries are available in the Devilbox intranet by default:
   <td><a href="https://www.phpmyadmin.net"><img width="64" style="width:64px;" src="https://raw.githubusercontent.com/cytopia/icons/master/128x128/phpmyadmin.png" alt="phpMyAdmin" /></a></td>
   <td><a href="http://phppgadmin.sourceforge.net"><img width="64" style="width:64px;" src="https://raw.githubusercontent.com/cytopia/icons/master/128x128/phppgadmin.png" alt="phpPgAdmin" /></a></td>
   <td><a href="https://github.com/sasanrose/phpredmin"><img width="64" style="width:64px;" src="https://raw.githubusercontent.com/cytopia/icons/master/128x128/phpredmin.png" alt="phpRedMin" /></a></td>
+  <td><a href="https://github.com/elijaa/phpmemcachedadmin"><img width="64" style="width:64px;" src="https://raw.githubusercontent.com/cytopia/icons/master/128x128/phpmemcachedadmin.png" alt="PHPMemcachedAdmin" /></a></td>
   <td><a href="https://github.com/PeeHaa/OpCacheGUI"><img width="64" style="width:64px;" src="https://raw.githubusercontent.com/cytopia/icons/master/128x128/opcachegui.png" alt="OpCacheGUI" /></a></td>
   <td><img width="64" style="width:64px;" src="https://raw.githubusercontent.com/cytopia/icons/master/128x128/email.png" alt="Mail viewer" /></td>
  </tr>
@@ -553,6 +559,7 @@ The following batteries are available in the Devilbox intranet by default:
   <td><a href="https://www.phpmyadmin.net">phpMyAdmin</a></td>
   <td><a href="http://phppgadmin.sourceforge.net">phpPgAdmin</a></td>
   <td><a href="https://github.com/sasanrose/phpredmin">phpRedMin</a></td>
+  <td><a href="https://github.com/elijaa/phpmemcachedadmin">PHPMemcached Admin</a></td>
   <td><a href="https://github.com/PeeHaa/OpCacheGUI">OpCache GUI</a></td>
   <td>Mail viewer</td>
  </tr>
@@ -766,7 +773,7 @@ The Devilbox is a development stack, so it is made sure that a lot of PHP module
 | tidy           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
 | tokenizer      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
 | uploadprogress |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
-| wddx           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |
+| wddx           |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
 | xdebug         |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |    🗸    |         |         |
 | xml            |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
 | xmlreader      |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |    ✔    |
@@ -797,6 +804,7 @@ As far as tested there are no limitations and you can use any Framework or CMS j
 
 <a target="_blank" title="CakePHP" href="https://cakephp.org"><img width="64" style="width:64px" src="docs/img/logo_fw/cake.png" alt="Devilbox"/></a>
 <a target="_blank" title="CodeIgniter" href="https://www.codeigniter.com"><img width="64" style="width:64px" src="docs/img/logo_fw/codeigniter.png" alt="Devilbox"/></a>
+<a target="_blank" title="Contao" href="https://contao.org/en/"><img width="64" style="width:64px" src="docs/img/logo_fw/contao.png" alt="Devilbox"/></a>
 <a target="_blank" title="CraftCMS" href="https://craftcms.com/"><img width="64" style="width:64px" src="docs/img/logo_fw/craftcms.png" alt="Devilbox"/></a>
 <a target="_blank" title="Drupal" href="https://www.drupal.org"><img width="64" style="width:64px" src="docs/img/logo_fw/drupal.png" alt="Devilbox"/></a>
 <a target="_blank" title="Joomla" href="https://www.joomla.org"><img width="64" style="width:64px" src="docs/img/logo_fw/joomla.png" alt="Devilbox"/></a>
@@ -815,6 +823,7 @@ As far as tested there are no limitations and you can use any Framework or CMS j
 > **Documentation:**<br/>
 > [Setup CakePHP](https://devilbox.readthedocs.io/en/latest/examples/setup-cakephp.html) |
 > [Setup CodeIgniter](https://devilbox.readthedocs.io/en/latest/examples/setup-codeigniter.html) |
+> [Setup Contao](https://devilbox.readthedocs.io/en/latest/examples/setup-contao.html) |
 > [Setup CraftCMS](https://devilbox.readthedocs.io/en/latest/examples/setup-craftcms.html) |
 > [Setup Drupal](https://devilbox.readthedocs.io/en/latest/examples/setup-drupal.html) |
 > [Setup Joomla](https://devilbox.readthedocs.io/en/latest/examples/setup-joomla.html) |
@@ -856,6 +865,7 @@ The Devilbox comes with a pre-configured intranet on `http://localhost` and `htt
 * **[phpMyAdmin](https://www.phpmyadmin.net)**
 * **[phpPgAdmin](http://phppgadmin.sourceforge.net)**
 * **[phpRedMin](https://github.com/sasanrose/phpredmin)**
+* **[PHPMemcachedAdmin](https://github.com/elijaa/phpmemcachedadmin)**
 * **[OpcacheGUI](https://github.com/PeeHaa/OpCacheGUI)**
 
 > **Documentation:**

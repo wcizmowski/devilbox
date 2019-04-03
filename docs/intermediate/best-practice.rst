@@ -1,3 +1,5 @@
+.. include:: /_includes/snippets/__ANNOUNCEMENTS__.rst
+
 .. _best_practice:
 
 *************
@@ -31,86 +33,6 @@ Projects
 .. seealso::
    :ref:`howto_move_projects_to_a_different_directory`
      Follow this guide to keep your projects separated from the Devilbox git directory.
-
-Databases
----------
-
-Moving your projects out of the Devilbox git directory is one step, you still need to take care
-about persistent data of all available databases as well.
-
-Let's assume you desired location for database storage is at ``/home/user/workspace/db/``.
-
-MySQL
-^^^^^
-
-All you have to to is to adjust the path of :ref:`env_mysql_datadir` in the ``.env`` file.
-
-.. code-block:: bash
-
-   # Navigate to Devilbox git directory
-   host> cd path/to/devilbox
-
-   # Open the .env file with your favourite editor
-   host> vim .env
-
-Now Adjust the value of :ref:`env_mysql_datadir`
-
-.. code-block:: bash
-   :caption: .env
-   :emphasize-lines: 1
-
-   HOST_PATH_MYSQL_DATADIR=/home/user/workspace/db/mysql
-
-That's it, whenever you start up the Devilbox ``/home/user/workspace/db/mysql/`` will be mounted
-into the MySQL container.
-
-PostgreSQL
-^^^^^^^^^^
-
-All you have to to is to adjust the path of :ref:`env_pgsql_datadir` in the ``.env`` file.
-
-.. code-block:: bash
-
-   # Navigate to Devilbox git directory
-   host> cd path/to/devilbox
-
-   # Open the .env file with your favourite editor
-   host> vim .env
-
-Now Adjust the value of :ref:`env_pgsql_datadir`
-
-.. code-block:: bash
-   :caption: .env
-   :emphasize-lines: 1
-
-   HOST_PATH_PGSQL_DATADIR=/home/user/workspace/db/pgsql
-
-That's it, whenever you start up the Devilbox ``/home/user/workspace/db/pqsql/`` will be mounted
-into the PostgreSQL container.
-
-MongoDB
-^^^^^^^
-
-All you have to to is to adjust the path of :ref:`env_mongo_datadir` in the ``.env`` file.
-
-.. code-block:: bash
-
-   # Navigate to Devilbox git directory
-   host> cd path/to/devilbox
-
-   # Open the .env file with your favourite editor
-   host> vim .env
-
-Now Adjust the value of :ref:`env_mongo_datadir`
-
-.. code-block:: bash
-   :caption: .env
-   :emphasize-lines: 1
-
-   HOST_PATH_MONGO_DATADIR=/home/user/workspace/db/mongo
-
-That's it, whenever you start up the Devilbox ``/home/user/workspace/db/mongo/`` will be mounted
-into the MongoDB container.
 
 
 Version control ``.env`` file
@@ -152,19 +74,11 @@ PHP project hostname settings
 =============================
 
 When configuring your PHP projects to use MySQL, PostgreSQL, Redis, Mongo and other services,
-make sure to set the hostname of each of those services to ``127.0.0.1``.
+make sure to set the hostname/address of each of those services to how they are defined within the
+Devilbox network:
 
-**Why is that?**
+.. include:: /_includes/snippets/core-container.rst
 
-The PHP container port-forwards each service port to its own listen address on ``127.0.0.1``.
-The Devilbox also exposes each of those service ports to the host operating system on ``127.0.0.1``.
-
-This allows you to keep your project configuration unchanged and have the same behaviour inside the
-PHP container and on your host operating system.
-
-.. important::
-   Do not mix up ``localhost`` with ``127.0.0.1``. They behave differently!
-   Use ``127.0.0.1`` and do not use ``localhost``.
 
 As an example, if you want to access the MySQL database from within the PHP container, you do the
 following:
@@ -179,10 +93,11 @@ following:
    host> ./shell.sh
 
    # Enter the MySQL console
-   php> mysql -u root -h 127.0.0.1 -p
+   php> mysql -u root -h mysql -p
    mysql>
 
-The very same command applies to access the MySQL database from your host operating system:
+To access the MySQL database from your host operating system you would need the address to what it
+exposes to on your host (usually ``127.0.0.1``):
 
 .. code-block:: bash
    :emphasize-lines: 2
@@ -191,17 +106,14 @@ The very same command applies to access the MySQL database from your host operat
    host> mysql -u root -h 127.0.0.1 -p
    mysql>
 
-So no matter if you use the Devilbox or have another LAMP stack installed locally on your host
-operating system, you do not have to change your configuration files if you stick to this tip.
-
-So any of your projects php files that configure MySQL as an example should point the hostname
-or IP address of the MySQL server to ``127.0.0.1``:
+Any of your projects php files that configure MySQL as an example should point the hostname
+or IP address of the MySQL server to ``mysql``:
 
 .. code-block:: php
 
    <?php
    // MySQL server connection in your project configuration
-   mysql_host = '127.0.0.1';
+   mysql_host = 'mysql';
    mysql_port = '3306';
    mysql_user = 'someusername';
    mysql_pass = 'somepassword';
@@ -213,11 +125,11 @@ or IP address of the MySQL server to ``127.0.0.1``:
 Timezone
 ========
 
-The :ref:`env_timezone` value will affect PHP, web server and MySQL container equally. It does
+The :ref:`env_timezone` value will affect PHP and web serverequally. It does
 however not affect any other official Docker container that are used within the Devilbox. This is
 an issue that is currently still being worked on.
 
-Feel free to change this to any timezone you require for PHP and MySQL, but keep in mind that
+Feel free to change this to any timezone you require for PHP, but keep in mind that
 timezone values for databases can be painful, once you want to switch to a different timezone.
 
 A good practice is to always use ``UTC`` on databases and have your front-end application calculate

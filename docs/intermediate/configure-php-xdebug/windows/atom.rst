@@ -1,6 +1,7 @@
 :orphan:
 
 .. include:: /_includes/all.rst
+.. include:: /_includes/snippets/__ANNOUNCEMENTS__.rst
 
 .. _configure_php_xdebug_win_atom:
 
@@ -29,22 +30,28 @@ about common Xdebug options.
    * :ref:`php_ini`
    * :ref:`configure_php_xdebug_options`
 
-Gather DockerNAT IP address
----------------------------
+Gather Host IP address
+----------------------
 
 On Windows you will have to manually retrieve the IP address to which Xdebug should connect to
 via ``xdebug.remote_host``.
 
+When you have done no custom configuration in your Virtual Switch manager, Docker for Windows will
+use the ``Default Switch`` automatically.
 
-   1. Open command line
-   2. Enter ``ipconfig``
-   3. Look for the IP4 address in ``DockerNAT`` (e.g.: ``192.168.246.1``)
+   .. include:: /_includes/figures/xdebug/windows/virtual-switch-manager.rst
 
-   .. seealso:: :ref:`howto_open_terminal_on_win`
+1. Open command line
+2. Enter ``ipconfig``
+3. Look for the IP4 address in ``Default Switch`` (e.g.: ``192.168.0.12``)
+
+   .. include:: /_includes/figures/xdebug/windows/ipconfig.rst
 
    .. important::
-      ``192.168.246.1`` is meant as an example and will eventually differ on your system.
+      ``192.168.0.12`` is meant as an example and will eventually differ on your system.
       Ensure you substitute it with the correct IP address.
+
+.. seealso:: :ref:`howto_open_terminal_on_win`
 
 
 Assumption
@@ -63,7 +70,9 @@ For the sake of this example, we will assume the following settings and file sys
 +------------------------------+------------------------------------------+
 | Selected PHP version         | ``5.6``                                  |
 +------------------------------+------------------------------------------+
-| DockerNAT IP address         | ``192.168.246.1``                        |
+| DockerNAT IP address         | ``192.168.0.12``                         |
++------------------------------+------------------------------------------+
+| Virtual Switch IP address    | ``192.168.0.12``                         |
 +------------------------------+------------------------------------------+
 
 The **Resulting local project path** is the path where all projects are stored locally on your
@@ -139,7 +148,7 @@ Copy/paste all of the following lines into the above created ``xdebug.ini`` file
 
       ; The Windows way
       xdebug.remote_connect_back=0
-      xdebug.remote_host=192.168.246.1
+      xdebug.remote_host=192.168.0.12
 
       ; idekey value is specific to Atom
       xdebug.idekey=xdebug.atom

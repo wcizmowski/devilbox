@@ -121,6 +121,7 @@ host is ready to be served with your custom domain.
    custom-container/enable-blackfire
    custom-container/enable-elk-stack
    custom-container/enable-mailhog
+   custom-container/enable-ngrok
    custom-container/enable-rabbitmq
    custom-container/enable-solr
    custom-container/enable-varnish
@@ -132,6 +133,7 @@ host is ready to be served with your custom domain.
 
    corporate-usage/shared-devilbox-server-in-lan
    corporate-usage/use-external-databases
+   corporate-usage/showcase-over-the-internet
 ..
    corporate-usage/deploy-devilbox-via-ansible
    corporate-usage/access-colleagues-devilbox
@@ -173,6 +175,7 @@ host is ready to be served with your custom domain.
 
    examples/setup-cakephp
    examples/setup-codeigniter
+   examples/setup-contao
    examples/setup-craftcms
    examples/setup-drupal
    examples/setup-joomla
@@ -216,3 +219,10 @@ host is ready to be served with your custom domain.
    support/howto
    support/blogs-videos-and-use-cases
    support/artwork
+
+.. toctree::
+   :caption: 3rd party projects
+   :maxdepth: 1
+
+   third-party/devilbox-cli
+   third-party/nginx-acme

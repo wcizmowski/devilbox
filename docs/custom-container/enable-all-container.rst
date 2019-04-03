@@ -1,4 +1,5 @@
 .. include:: /_includes/all.rst
+.. include:: /_includes/snippets/__ANNOUNCEMENTS__.rst
 
 .. _custom_container_enable_all_additional_container:
 
@@ -58,6 +59,7 @@ In order to fully customize each container, refer to their own documentation sec
    * :ref:`custom_container_enable_blackfire`
    * :ref:`custom_container_enable_elk_stack`
    * :ref:`custom_container_enable_mailhog`
+   * :ref:`custom_container_enable_ngrok`
    * :ref:`custom_container_enable_rabbitmq`
    * :ref:`custom_container_enable_solr`
    * :ref:`custom_container_enable_varnish`
