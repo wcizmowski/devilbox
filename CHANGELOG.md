@@ -4,6 +4,35 @@ Make sure to have a look at [UPDATING](https://github.com/cytopia/devilbox/blob/
 major versions.
 
 
+
+## Unreleased
+
+#### Added
+- Make Ngrok region configurable via `NGROK_REGION` env variable
+
+
+## Bugfix Release v1.0.2 (2019-05-21)
+
+#### Fixed
+- Fixed various typos in documentation
+- Fix CI tests: They still expected a mounted mail directory instead of a Docker volume
+- Fix mods for PHP 8.0
+- Make npm binaries available in $PATH
+- Remove orphaned mentions of HOST_PATH_MYSQL_DATADIR
+- Allow symlinks in autostart scripts
+
+#### Added
+- Documentation: Setup ProcessWire
+- Tool: Angular CLI
+- Tool: Laravel Lumen
+- Tool: [prestissimo](https://github.com/hirak/prestissimo)
+- Tool: [yq](https://github.com/mikefarah/yq)
+- Module: OAuth
+
+#### Removed
+- Enchant module for PHP 7.4 and PHP 8.0 (build breaks)
+
+
 ## Bugfix Release v1.0.1 (2019-03-24)
 
 This is a bugfix release and everybody is encouraged to upgrade to this tag as soon as possible.
@@ -24,6 +53,7 @@ No explicit actions to be taken for updating.
 - [#536](https://github.com/cytopia/devilbox/issues/536) Added @vue/cli and @vue/cli-service-global
 
 
+
 ## Release v1.0.0 (2019-03-19)
 
 This is the first major stable release of the Devilbox.
@@ -33,6 +63,7 @@ This is the first major stable release of the Devilbox.
 - Everything from v0.15.0 has been backported
 
 
+
 ## Pre-Release v1.0.0-alpha1 (2019-03-09)
 
 #### Changed
@@ -40,6 +71,7 @@ This is the first major stable release of the Devilbox.
     - This fixes various mount issues on Windows: #175 #382
     - This improves general performance
 - Use Official MySQL, MariaDB and Percona Docker container
+
 
 
 ## Release v0.15.0 (2019-03-09)
