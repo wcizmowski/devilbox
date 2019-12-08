@@ -14,7 +14,7 @@
 ######################################
 
 # Ignore variable data
-/.env
+#/.env
 /backups/*
 /log/[a-z0-9-]*
 
